@@ -1,0 +1,6 @@
+{
+  "name": "Interactive Portfolio Website",
+  "description": "A highly customizable and interactive portfolio website with responsive sections, real-time customization options, a visitor chatbot interviewer, and downloadable resume presets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
