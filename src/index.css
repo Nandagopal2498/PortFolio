@@ -13,6 +13,26 @@
   --color-neutral-550: #616161;
   --color-neutral-750: #333333;
   --color-neutral-850: #1f1f1f;
+
+  --animate-gradient: gradientAnimation 20s ease infinite;
+
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+@utility animated-gradient-bg {
+  background: linear-gradient(-45deg, #f8fafc, #f1f5f9, #e2e8f0, #f8fafc);
+  background-size: 400% 400%;
+  animation: var(--animate-gradient);
+}
+
+.dark .animated-gradient-bg {
+  background: linear-gradient(-45deg, #09090b, #18181b, #27272a, #09090b);
+  background-size: 400% 400%;
+  animation: var(--animate-gradient);
 }
 
 @variant dark (&:where(.dark, .dark *));

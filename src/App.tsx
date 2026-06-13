@@ -7,6 +7,7 @@ import VisitorView from './components/VisitorView';
 import EditorView from './components/EditorView';
 import ResumeViewer from './components/ResumeViewer';
 import InteractiveInterviewer from './components/InteractiveInterviewer';
+import OptimizedParticles from './components/OptimizedParticles';
 
 export default function App() {
   const [viewMode, setViewMode] = useState<'visitor' | 'editor' | 'resume'>('visitor');
@@ -73,44 +74,15 @@ export default function App() {
           }
         }
 
-        // Revert core skills to standard 8 skills if any of the workspace/cart items are in there
-        const hasExtraInSkills = parsed?.skills?.some((s: any) => ["Node.js", "Git", "GitHub", "Generative AI", "VS Code"].includes(s.name));
-        if (hasExtraInSkills && parsed?.skills) {
+        // Reset to 8-skill balanced set whenever the stored list doesn't match exactly
+        const hasOutdatedSkills = !parsed?.skills || 
+                                  !Array.isArray(parsed.skills) || 
+                                  parsed.skills.length !== 8 || 
+                                  !parsed.skills.some((s: any) => s.name === "JavaScript") ||
+                                  !parsed.skills.some((s: any) => s.name === "Problem Solving");
+        if (hasOutdatedSkills && parsed) {
           parsed.skills = defaultProfileData.skills;
           updated = true;
-        }
-
-        // Force and reorder C++, Python and React.js to match the decreasing order and swapped request
-        if (parsed?.skills) {
-          const pythonIndex = parsed.skills.findIndex((s: any) => s.name === "Python");
-          const reactIndex = parsed.skills.findIndex((s: any) => s.name === "React.js");
-          const cppIndex = parsed.skills.findIndex((s: any) => s.name === "C++");
-          if (
-            pythonIndex === -1 || 
-            reactIndex === -1 || 
-            cppIndex === -1 || 
-            pythonIndex > reactIndex || 
-            reactIndex > cppIndex
-          ) {
-            parsed.skills = defaultProfileData.skills;
-            updated = true;
-          } else {
-            parsed.skills = parsed.skills.map((s: any) => {
-              if (s.name === "C++" && s.level !== 75) {
-                s.level = 75;
-                updated = true;
-              }
-              if (s.name === "Python" && s.level !== 85) {
-                s.level = 85;
-                updated = true;
-              }
-              if (s.name === "React.js" && s.level !== 75) {
-                s.level = 75;
-                updated = true;
-              }
-              return s;
-            });
-          }
         }
 
         // Migrate education to NXTWAVE with the 9 specified key focus areas
@@ -122,6 +94,16 @@ export default function App() {
         if (hasOldEducation) {
           parsed.education = defaultProfileData.education;
           updated = true;
+        }
+
+        // Migrate themeMode default to light once for existing users
+        if (!parsed.settings) {
+          parsed.settings = { ...defaultProfileData.settings };
+          updated = true;
+        } else if (!localStorage.getItem('theme_migrated_to_light_v1')) {
+          parsed.settings.themeMode = 'light';
+          updated = true;
+          localStorage.setItem('theme_migrated_to_light_v1', 'true');
         }
 
         if (updated) {
@@ -250,10 +232,11 @@ export default function App() {
   const unreadMessageCount = messages.filter(m => !m.read).length;
 
   return (
-    <div className="min-h-screen bg-gray-50 text-neutral-900 transition-colors duration-300 dark:bg-neutral-950 dark:text-neutral-100 selection:bg-neutral-800 dark:selection:bg-white selection:text-white dark:selection:text-neutral-950 text-wrap break-words">
+    <div className="min-h-screen animated-gradient-bg relative text-neutral-900 transition-colors duration-300 dark:text-neutral-100 selection:bg-neutral-800 dark:selection:bg-white selection:text-white dark:selection:text-neutral-950 text-wrap break-words overflow-x-hidden">
+      <OptimizedParticles />
       
       {/* CORE ACTIVE WORKSPACE PREVIEWS */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6">
+      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 z-10 relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={viewMode}

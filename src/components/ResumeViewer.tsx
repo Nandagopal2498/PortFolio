@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Globe, ExternalLink, Printer, Clipboard, Check, FileText } from 'lucide-react';
+import { Mail, Phone, MapPin, ExternalLink, Printer, Clipboard, Check, FileText } from 'lucide-react';
 import { PortfolioData } from '../types';
 
 interface ResumeViewerProps {
@@ -132,7 +132,6 @@ export default function ResumeViewer({ portfolioData }: ResumeViewerProps) {
             </span>
             {profile.websiteUrl && (
               <span className="flex items-center gap-2">
-                <Globe className="h-3.5 w-3.5 text-neutral-400" />
                 <a href={profile.websiteUrl} target="_blank" rel="noreferrer" className="hover:underline flex items-center gap-1">
                   {profile.websiteUrl.replace(/^https?:\/\//, '')}
                   <ExternalLink className="h-2.5 w-2.5 opacity-60" />
