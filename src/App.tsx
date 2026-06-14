@@ -78,8 +78,8 @@ export default function App() {
         const hasOutdatedSkills = !parsed?.skills || 
                                   !Array.isArray(parsed.skills) || 
                                   parsed.skills.length !== 8 || 
-                                  !parsed.skills.some((s: any) => s.name === "JavaScript") ||
-                                  !parsed.skills.some((s: any) => s.name === "Problem Solving");
+                                  !parsed.skills.some((s: any) => s.name === "HTML") ||
+                                  !parsed.skills.some((s: any) => s.name === "CSS");
         if (hasOutdatedSkills && parsed) {
           parsed.skills = defaultProfileData.skills;
           updated = true;

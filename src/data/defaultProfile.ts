@@ -60,20 +60,20 @@ export const defaultProfileData: PortfolioData = {
       institution: "NXTWAVE INSTITUTE OF ADVANCED TECHNOLOGY",
       location: "Hyderabad, India",
       startDate: "2024",
-      endDate: "2028 (Expected)",
+      endDate: "2028",
       gpa: "Current Student",
       details: "• Prompt Engineering\n• AI Application Development\n• Team Collaboration\n• Code Optimization\n• Data Structures & Algorithms\n• Object-Oriented Programming (OOP)\n• Problem Solving\n• Full-Stack Development\n• Responsive Web Design"
     }
   ],
   skills: [
-    { id: "sk-1", name: "JavaScript", category: "Languages", level: 90 },
-    { id: "sk-2", name: "React", category: "Frameworks", level: 88 },
-    { id: "sk-3", name: "Python", category: "Languages", level: 85 },
-    { id: "sk-4", name: "C++", category: "Languages", level: 82 },
-    { id: "sk-5", name: "Node.js", category: "Backend", level: 80 },
-    { id: "sk-6", name: "Git", category: "Tools", level: 82 },
-    { id: "sk-7", name: "TypeScript", category: "Languages", level: 75 },
-    { id: "sk-8", name: "Problem Solving", category: "Others", level: 90 },
+    { id: "sk-1", name: "HTML", category: "Frontend", level: 90 },
+    { id: "sk-2", name: "CSS", category: "Frontend", level: 85 },
+    { id: "sk-3", name: "Python", category: "Backend", level: 85 },
+    { id: "sk-4", name: "JavaScript", category: "Frontend", level: 80 },
+    { id: "sk-5", name: "React.js", category: "Frontend", level: 75 },
+    { id: "sk-6", name: "C++", category: "Backend", level: 75 },
+    { id: "sk-7", name: "C", category: "Backend", level: 75 },
+    { id: "sk-8", name: "SQL", category: "Backend", level: 70 },
   ],
   settings: {
     accentColor: "#3b82f6", // default blue
